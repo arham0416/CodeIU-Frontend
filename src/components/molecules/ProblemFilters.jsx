@@ -11,8 +11,6 @@ export default function ProblemFilters() {
   const { authUser } = useAuthStore();
 
 
-  // This function updates the URL when you type
-  // e.g. /problems -> /problems?q=two+sum
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
 

@@ -1,16 +1,13 @@
 "use client";
 
-
 import Portal from "@/components/atoms/Portal";
 import { useAdminStore } from "@/store/useAdminStore";
 
 const ModalDelete = ({ isDeleting, setisDeleting,userid }) => {
   if (!isDeleting) return null;
 
-
  const { DeleteUser}=useAdminStore()
   
-
   const handledelete=async(e)=>{
     e.preventDefault();
     try {
@@ -18,7 +15,7 @@ const ModalDelete = ({ isDeleting, setisDeleting,userid }) => {
       await DeleteUser(userid);
       setisEditing(false);
     } catch (error) {
-      console.log('Error while Deleting');
+      console.error('Error while Deleting');
       
     }
   }

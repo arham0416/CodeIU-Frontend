@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
-import { ArrowLeft, ExternalLink, FileText, Image as ImageIcon, Link as LinkIcon, Video } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText, Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function ResourceViewerPage({ params }) {

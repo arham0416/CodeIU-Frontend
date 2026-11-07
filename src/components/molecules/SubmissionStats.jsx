@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CircularProgress = ({ percentage, solved }) => {
   const radius = 40;
   const circumference = 2 * Math.PI * radius;

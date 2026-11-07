@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { CheckCircle2 } from "lucide-react";
 

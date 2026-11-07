@@ -1,4 +1,3 @@
-import React from "react";
 import { Plus, Trash2, BookOpen } from "lucide-react";
 
 export const TagsSection = ({ register, tagFields, appendTag, removeTag, errors }) => {

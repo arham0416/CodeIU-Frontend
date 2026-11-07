@@ -7,7 +7,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { Code2, Expand, Book, CheckCircle, CheckCircle2, Circle, Loader2, Clock, Trophy, Youtube, Play, BookOpen, Layout } from "lucide-react";
+import { Book, CheckCircle, CheckCircle2, Circle, Clock, Trophy, Youtube, Play, BookOpen, Layout, Pencil, Save, X as CloseIcon } from "lucide-react";
 import "katex/dist/katex.min.css";
 import PreviousSubmissions from "@/components/molecules/PreviousSubmissions";
 import ProblemLeaderboard from "@/components/molecules/ProblemLeaderboard";
@@ -15,8 +15,7 @@ import EditorialContent from "@/components/atoms/EditorialContent";
 import { useProblemStore } from "@/store/useProblemStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { toast } from "react-toastify";
-import { Pencil, Save, X as CloseIcon } from "lucide-react";
-import { motion, Reorder, AnimatePresence } from "framer-motion";
+import { motion, Reorder, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 
 const VideoEmbed = ({ url }) => {
@@ -114,7 +113,9 @@ const ProblemDescription = ({
     if (savedOrder) {
       try {
         setTabOrder(JSON.parse(savedOrder));
-      } catch (e) { }
+      } catch (e) {
+        console.error("Failed to parse saved tab order:", e);
+      }
     }
   }, [problemId]);
 
@@ -130,6 +131,7 @@ const ProblemDescription = ({
       setIsEditingEditorial(false);
       router.refresh();
     } catch (error) {
+      console.error("Failed to save editorial:", error);
       // Error toast handled by store
     }
   };

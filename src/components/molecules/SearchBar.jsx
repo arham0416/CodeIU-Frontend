@@ -5,17 +5,13 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { useSearchStore } from "@/store/useSearchStore";
 
-
 export default function ProblemSearchBar() {
-  // Get all functions and state from the store
   const { searchTerm, setSearchTerm, search, clearSearch } = useSearchStore();
 
-  // Create local state for the input to enable debouncing
   const [localSearch, setLocalSearch] = useState(searchTerm);
 
   // Implement the debouncing effect
   useEffect(() => {
-    // Update the store's searchTerm immediately for persistence
     setSearchTerm(localSearch);
 
     const timer = setTimeout(() => {

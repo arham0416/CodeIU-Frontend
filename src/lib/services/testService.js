@@ -16,7 +16,6 @@ export async function samplePostRequest(payload) {
     const data = await res.json();
 
     if (!res.ok) {
-      // Extract error code from the standardized backend response
       const errorCode = data.error?.code || "UNKNOWN_ERROR";
       const errorMessage = data.error?.message || "Something went wrong";
       
@@ -24,7 +23,6 @@ export async function samplePostRequest(payload) {
       return { success: false, errorCode, message: errorMessage };
     }
 
-    console.log("Request successful: Request received confirmed by backend logs");
     return { success: true, data };
   } catch (error) {
     console.error("Network or parsing error:", error.message);

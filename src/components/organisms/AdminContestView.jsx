@@ -1,7 +1,7 @@
 'use client'
 import CreateContestDialog from '@/components/organisms/CreateContestDialog'
 import EditContestDialog from '@/components/organisms/EditContestDialog'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import AdminCrudView from './AdminCrudView'
 import { useContestStore } from '@/store/useContestStore'
 import SkeletonUI from '@/components/atoms/Loader'

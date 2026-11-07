@@ -8,7 +8,6 @@ import {
   getContestProblemAction 
 } from "@/actions/bundleBridge";
 
-// --- Helper: Normalize Data Structure ---
 const normalizeProblem = (p) => {
   if (!p) return null;
   const data = p.snapshot || p; 

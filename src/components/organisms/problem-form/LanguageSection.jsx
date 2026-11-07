@@ -1,7 +1,36 @@
-import React from "react";
 import { Code2, CheckCircle2 } from "lucide-react";
 import { Controller } from "react-hook-form";
 import Editor from "@monaco-editor/react";
+
+const EDITOR_OPTIONS = {
+    minimap: { enabled: false },
+    fontSize: 14,
+    lineNumbers: "on",
+    scrollBeyondLastLine: false,
+    automaticLayout: true,
+};
+
+const CodeEditorField = ({ name, control, language, error }) => (
+    <>
+        <div className="border rounded-md overflow-hidden">
+            <Controller
+                name={name}
+                control={control}
+                render={({ field }) => (
+                    <Editor
+                        height="300px"
+                        language={language.toLowerCase()}
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={EDITOR_OPTIONS}
+                    />
+                )}
+            />
+        </div>
+        {error && <div className="mt-2 text-error text-sm">{error.message}</div>}
+    </>
+);
 
 export const LanguageSection = ({ language, control, register, errors }) => {
     return (
@@ -12,74 +41,33 @@ export const LanguageSection = ({ language, control, register, errors }) => {
             </h3>
 
             <div className="space-y-6">
-                {/* Starter Code */}
                 <div className="card bg-base-100 shadow-md">
                     <div className="card-body p-4 md:p-6">
                         <h4 className="font-semibold text-base md:text-lg mb-4">Starter Code Template</h4>
-                        <div className="border rounded-md overflow-hidden">
-                            <Controller
-                                name={`codeSnippets.${language}`}
-                                control={control}
-                                render={({ field }) => (
-                                    <Editor
-                                        height="300px"
-                                        language={language.toLowerCase()}
-                                        theme="vs-dark"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        options={{
-                                            minimap: { enabled: false },
-                                            fontSize: 14,
-                                            lineNumbers: "on",
-                                            scrollBeyondLastLine: false,
-                                            automaticLayout: true,
-                                        }}
-                                    />
-                                )}
-                            />
-                        </div>
-                        {errors.codeSnippets?.[language] && (
-                            <div className="mt-2 text-error text-sm">{errors.codeSnippets[language].message}</div>
-                        )}
+                        <CodeEditorField
+                            name={`codeSnippets.${language}`}
+                            control={control}
+                            language={language}
+                            error={errors.codeSnippets?.[language]}
+                        />
                     </div>
                 </div>
 
-                {/* Reference Solution */}
                 <div className="card bg-base-100 shadow-md">
                     <div className="card-body p-4 md:p-6">
                         <h4 className="font-semibold text-base md:text-lg mb-4 flex items-center gap-2">
                             <CheckCircle2 className="w-5 h-5 text-success" />
                             Reference Solution
                         </h4>
-                        <div className="border rounded-md overflow-hidden">
-                            <Controller
-                                name={`referenceSolutions.${language}`}
-                                control={control}
-                                render={({ field }) => (
-                                    <Editor
-                                        height="300px"
-                                        language={language.toLowerCase()}
-                                        theme="vs-dark"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        options={{
-                                            minimap: { enabled: false },
-                                            fontSize: 14,
-                                            lineNumbers: "on",
-                                            scrollBeyondLastLine: false,
-                                            automaticLayout: true,
-                                        }}
-                                    />
-                                )}
-                            />
-                        </div>
-                        {errors.referenceSolutions?.[language] && (
-                            <div className="mt-2 text-error text-sm">{errors.referenceSolutions[language].message}</div>
-                        )}
+                        <CodeEditorField
+                            name={`referenceSolutions.${language}`}
+                            control={control}
+                            language={language}
+                            error={errors.referenceSolutions?.[language]}
+                        />
                     </div>
                 </div>
 
-                {/* Examples */}
                 <div className="card bg-base-100 shadow-md">
                     <div className="card-body p-4 md:p-6">
                         <h4 className="font-semibold text-base md:text-lg mb-4">Example</h4>

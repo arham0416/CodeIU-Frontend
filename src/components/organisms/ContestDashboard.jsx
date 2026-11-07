@@ -2,7 +2,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useContestStore } from "@/store/useContestStore";
 import { useAuthStore } from "@/store/useAuthStore";
-import { Trophy, Calendar, Zap, LayoutGrid, Plus, Swords, Loader2 } from "lucide-react";
+import { Trophy, Calendar, Zap, LayoutGrid, Plus, Swords } from "lucide-react";
 import GridHighlights from "@/components/atoms/GridHighlights";
 import dynamic from "next/dynamic";
 import { getContestSocket, joinContestRoom } from "@/lib/socket";

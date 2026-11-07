@@ -57,13 +57,14 @@ const nextConfig = {
       { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
     ];
 
-    const cacheHeaders = CDN_CACHE_DISABLED ? [
+    const NO_CACHE_HEADERS = [
       { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, proxy-revalidate' },
       { key: 'Pragma', value: 'no-cache' },
       { key: 'Expires', value: '0' },
-    ] : [
-      { key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' },
     ];
+    const cacheHeaders = CDN_CACHE_DISABLED
+      ? NO_CACHE_HEADERS
+      : [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }];
 
     return [
       // All pages: security headers
@@ -75,14 +76,8 @@ const nextConfig = {
       {
         source: '/_next/static/(.*)',
         headers: CDN_CACHE_DISABLED
-          ? [
-              { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, proxy-revalidate' },
-              { key: 'Pragma', value: 'no-cache' },
-              { key: 'Expires', value: '0' },
-            ]
-          : [
-              { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-            ],
+          ? NO_CACHE_HEADERS
+          : [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       // Public folder static assets
       {
@@ -93,14 +88,8 @@ const nextConfig = {
       {
         source: '/_next/static/media/(.*)',
         headers: CDN_CACHE_DISABLED
-          ? [
-              { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, proxy-revalidate' },
-              { key: 'Pragma', value: 'no-cache' },
-              { key: 'Expires', value: '0' },
-            ]
-          : [
-              { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-            ],
+          ? NO_CACHE_HEADERS
+          : [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
     ];
   },

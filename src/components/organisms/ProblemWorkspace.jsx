@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Group, Panel, Separator } from "react-resizable-panels";
-import { GripVertical, RotateCcw, Layout, Maximize2, Minimize2, ArrowLeftRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { RotateCcw, Layout, ArrowLeftRight } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import ProblemDescription from "./ProblemDescription";
 import CodeEditor from "./CodeEditor";
 

@@ -138,18 +138,14 @@ export async function getProblems(searchQuery = "", difficulty = "") {
   return problems;
 }
 
-export async function getProblemsPageData(searchQuery = "", difficulty = "") {
-  return fetchProblemsResource(searchQuery, difficulty);
-}
+export const getProblemsPageData = fetchProblemsResource;
 
 export async function getProblemById(slug) {
   const { problem } = await fetchProblemResource(slug);
   return problem;
 }
 
-export async function getProblemPageData(slug) {
-  return fetchProblemResource(slug);
-}
+export const getProblemPageData = fetchProblemResource;
 
 export async function getPlaylists() {
   try {

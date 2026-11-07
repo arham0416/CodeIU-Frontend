@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Plus, X, Loader2, Edit3 } from "lucide-react";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
 
@@ -57,6 +57,7 @@ const CreatePlaylistDialog = ({ isOpen, onClose, editingPlaylist = null }) => {
                 isPublished: true,
             });
         } catch (error) {
+            console.error("Failed to save playlist:", error);
             // Error handled in store
         } finally {
             setIsSubmitting(false);

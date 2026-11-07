@@ -5,7 +5,7 @@ async function test() {
       email: 'arham@codeiu.in', 
       password: 'password'
     });
-    console.log(res.headers);
+    process.stdout.write(`${JSON.stringify(res.headers, null, 2)}\n`);
   } catch (err) {
     console.error(err.response ? err.response.data : err.message);
   }

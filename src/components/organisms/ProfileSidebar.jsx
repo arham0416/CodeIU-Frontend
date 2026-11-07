@@ -1,4 +1,3 @@
-import React from 'react';
 import { User, Eye, CheckSquare, MessageSquare, Star, Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 

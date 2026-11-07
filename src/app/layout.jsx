@@ -18,8 +18,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://codeiu.in";
+const API_URL = process.env.NEXT_PUBLIC_DIRECT_ALB_URL || process.env.NEXT_PUBLIC_API_URL;
+
 export const metadata = {
-  metadataBase: new URL("https://codeiu.in"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "CodeIU - Master Your Coding Skills",
     template: "%s | CodeIU",
@@ -30,7 +33,7 @@ export const metadata = {
   openGraph: {
     title: "CodeIU - Master Your Coding Skills",
     description: "The ultimate platform for coders to practice, compete, and improve.",
-    url: "https://codeiu.in",
+    url: SITE_URL,
     siteName: "CodeIU",
     images: [
       {
@@ -59,7 +62,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://api.codeiu.in" />
+        {API_URL ? <link rel="dns-prefetch" href={API_URL} /> : null}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-base-100 text-base-content flex flex-col transition-colors duration-300`}

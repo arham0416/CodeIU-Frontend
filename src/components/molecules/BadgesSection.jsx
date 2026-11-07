@@ -1,6 +1,3 @@
-import React from 'react';
-import { Lock } from 'lucide-react';
-
 const BadgesSection = () => {
   return (
     <div className="bg-base-200/50 backdrop-blur-md border border-base-content/10 rounded-[2.5rem] p-8 relative overflow-hidden group h-full">

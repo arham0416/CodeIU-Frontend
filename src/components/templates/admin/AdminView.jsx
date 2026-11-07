@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { LayoutDashboard, Puzzle, Trophy, Search, Bell, Mail, Users, Home, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/useAuthStore';

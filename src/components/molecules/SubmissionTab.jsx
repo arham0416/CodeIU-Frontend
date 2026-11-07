@@ -1,11 +1,5 @@
-import React from "react";
 import { Loader2, CheckCircle2, XCircle, Clock, AlertTriangle } from "lucide-react";
 
-/**
- * Unified SubmissionTab
- * Handles both the history list view (regular problems) 
- * and the focused latest submission view (contest arena).
- */
 const SubmissionTab = ({
     submissions,
     latestSubmission, // Used for contest mode
@@ -15,7 +9,6 @@ const SubmissionTab = ({
 }) => {
     const isContest = variant === "contest";
 
-    // --- CONTEST MODE (Focused View) ---
     if (isContest) {
         const sub = latestSubmission;
 
@@ -73,7 +66,6 @@ const SubmissionTab = ({
         );
     }
 
-    // --- REGULAR MODE (History List) ---
     return (
         <div className="space-y-4">
             {!submissions || submissions.length === 0 ? (

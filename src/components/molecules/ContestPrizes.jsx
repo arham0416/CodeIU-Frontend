@@ -1,7 +1,7 @@
 // src/app/components/contest/ContestPrizes.jsx
 "use client";
 
-import { Trophy, Gift } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 // Using descriptive hype text instead of "x"
 const items = [

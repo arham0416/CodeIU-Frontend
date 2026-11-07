@@ -2,8 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  X, Plus, Search, ChevronUp, ChevronDown,
-  Trash2, Database, ListChecks, Hash, Settings2
+  X,
+  Plus,
+  Search,
+  ChevronUp,
+  ChevronDown,
+  Trash2,
+  Database,
+  ListChecks,
+  Hash,
 } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useBundleStore } from "@/store/useBundleStore";
@@ -11,7 +18,6 @@ import { toast } from "react-toastify";
 // Server Actions
 import { fetchAllProblemsAction, fetchProblemDetailsAction } from "@/actions/problemBridge";
 
-// --- Logic Helpers (Preserved) ---
 const tcRow = (row) => {
   if (!row) return { input: "1", output: "1" };
   if (typeof row === "string") {

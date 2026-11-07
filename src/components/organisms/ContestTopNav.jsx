@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ConfirmDialog from "@/components/molecules/ConfirmDialog";
 import { ChevronLeft, ChevronRight, List, Play, CloudDownload, Timer, Loader2, CheckCircle2 } from "lucide-react"; // ✅ Imported CheckCircle2
 import { useSubmissionStore } from "@/store/useSubmissionStore";

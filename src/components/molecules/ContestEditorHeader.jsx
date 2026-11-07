@@ -1,4 +1,3 @@
-import React from "react";
 import { RefreshCw, Expand } from "lucide-react";
 
 const ContestEditorHeader = ({

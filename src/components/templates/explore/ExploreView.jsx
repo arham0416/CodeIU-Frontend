@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Compass, Zap, Loader2, Plus } from "lucide-react";
 import GridHighlights from "@/components/atoms/GridHighlights";
 import { usePlaylistStore } from "@/store/usePlaylistStore";

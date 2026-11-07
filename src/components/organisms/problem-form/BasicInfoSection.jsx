@@ -1,5 +1,3 @@
-import React from "react";
-
 export const BasicInfoSection = ({ register, errors }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border border-white/10 rounded-md p-6">

@@ -1,4 +1,3 @@
-import React from "react";
 import { Plus, Trash2, CheckCircle2 } from "lucide-react";
 
 export const TestCasesSection = ({ register, testCaseFields, appendTestCase, removeTestCase, errors }) => {

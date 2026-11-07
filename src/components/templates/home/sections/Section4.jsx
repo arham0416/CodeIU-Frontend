@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Zap,
   CheckCircle,
   ArrowRight,
   Play,
@@ -10,7 +9,7 @@ import {
   BarChart3,
   Globe,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const Section4 = () => {
   const [isHovered, setIsHovered] = useState(false);

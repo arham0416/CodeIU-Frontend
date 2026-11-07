@@ -1,8 +1,17 @@
-import React from 'react';
 import { ArrowUp } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const COLORS = ['#3b82f6', '#14b8a6'];
+const TOOLTIP_CONTENT_STYLE = {
+    backgroundColor: 'hsl(var(--b1))',
+    border: '1px solid hsla(var(--bc) / 0.1)',
+    borderRadius: '1.5rem',
+    fontSize: '10px',
+    fontFamily: 'inherit',
+    fontWeight: '900',
+    textTransform: 'uppercase',
+    padding: '12px',
+};
 
 const AdminDashboardView = ({ stats }) => {
     const recentReportsData = [
@@ -51,16 +60,7 @@ const AdminDashboardView = ({ stats }) => {
                             <XAxis dataKey="name" stroke="currentColor" className="text-base-content/20" fontSize={9} fontVariant="black" axisLine={false} tickLine={false} />
                             <YAxis stroke="currentColor" className="text-base-content/20" fontSize={9} fontVariant="black" axisLine={false} tickLine={false} />
                             <Tooltip
-                                contentStyle={{
-                                    backgroundColor: 'hsl(var(--b1))',
-                                    border: '1px solid hsla(var(--bc) / 0.1)',
-                                    borderRadius: '1.5rem',
-                                    fontSize: '10px',
-                                    fontFamily: 'inherit',
-                                    fontWeight: '900',
-                                    textTransform: 'uppercase',
-                                    padding: '12px'
-                                }}
+                                contentStyle={TOOLTIP_CONTENT_STYLE}
                                 itemStyle={{ padding: '0px' }}
                             />
                             <Area type="monotone" dataKey="Users" stackId="1" stroke="hsl(var(--p))" fill="url(#colorBlue)" fillOpacity={1} strokeWidth={3} />
@@ -86,18 +86,7 @@ const AdminDashboardView = ({ stats }) => {
                             >
                                 {charByPercentData.map((entry, index) => <Cell key={`cell-${index}`} fill={index === 0 ? 'hsl(var(--p))' : 'hsl(var(--s))'} />)}
                             </Pie>
-                            <Tooltip
-                                contentStyle={{
-                                    backgroundColor: 'hsl(var(--b1))',
-                                    border: '1px solid hsla(var(--bc) / 0.1)',
-                                    borderRadius: '1.5rem',
-                                    fontSize: '10px',
-                                    fontFamily: 'inherit',
-                                    fontWeight: '900',
-                                    textTransform: 'uppercase',
-                                    padding: '12px'
-                                }}
-                            />
+                            <Tooltip contentStyle={TOOLTIP_CONTENT_STYLE} />
                         </PieChart>
                     </ResponsiveContainer>
                 </div>

@@ -1,5 +1,4 @@
 import CreateContestDialog from '@/components/organisms/CreateContestDialog'
-import React from 'react'
 
 const page = () => {
   return (

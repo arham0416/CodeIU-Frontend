@@ -1,8 +1,7 @@
 "use client";
 
 import { CreateProblemForm } from "@/components/organisms/CreateProblemFormPage";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const AddProblem = () => {
   const router = useRouter();

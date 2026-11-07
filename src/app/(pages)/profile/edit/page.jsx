@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import EditProfileForm from '@/components/organisms/EditProfileForm';
 import GridHighlights from '@/components/atoms/GridHighlights';
 

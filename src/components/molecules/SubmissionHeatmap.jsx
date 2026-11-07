@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import { useMemo } from "react";
 import { ChevronDown, Zap } from 'lucide-react';
-import { format, subDays, startOfMonth, eachMonthOfInterval, isSameMonth } from 'date-fns';
+import { format, subDays, eachMonthOfInterval } from "date-fns";
 
 const SubmissionHeatmap = ({ data = [] }) => {
   const getIntensityColor = (value) => {

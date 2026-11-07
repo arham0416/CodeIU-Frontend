@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Plus, X, Loader2, Edit3 } from "lucide-react";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
 
@@ -38,6 +38,7 @@ const CreateSubdivisionDialog = ({ isOpen, onClose, playlistId, editingSubdivisi
             }
             onClose();
         } catch (error) {
+            console.error("Failed to save subdivision:", error);
         } finally {
             setIsSubmitting(false);
         }

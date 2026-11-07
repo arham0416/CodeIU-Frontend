@@ -15,7 +15,7 @@ import ContestRules from "@/components/molecules/ContestRules";
 import ContestPrizes from "@/components/molecules/ContestPrizes";
 import ContestAchievements from "@/components/molecules/ContestAchievments";
 import AdminAttachProblemsDialog from "@/components/organisms/AdminAttachProblemDialog";
-import { Zap, AlertTriangle, Lock } from "lucide-react"; // ✅ Icons
+import { AlertTriangle, Lock } from "lucide-react";
 
 export default function ContestClientView({ initialContest }) {
   const { authUser } = useAuthStore();
@@ -63,49 +63,38 @@ export default function ContestClientView({ initialContest }) {
   const isAdmin = authUser?.role === "ADMIN";
   const problems = bundle?.problems || [];
 
-  // ✅ INTELLIGENT ENTER BUTTON
+  const clickRegister = () => {
+    const regBtn = document.getElementById("register-contest-btn");
+    if (regBtn) regBtn.click();
+  };
+
+  const StatusNotice = ({ variant, icon, title, message }) => (
+    <div className="flex flex-col items-center gap-2">
+      <button
+        disabled
+        className={`btn btn-${variant} btn-outline rounded-2xl px-12 h-14 text-lg font-black uppercase opacity-50 cursor-not-allowed gap-2`}
+      >
+        {icon} {title}
+      </button>
+      <p className={`text-${variant} text-[10px] font-black uppercase tracking-[0.2em] mt-2 ${variant === "error" ? "animate-pulse" : ""}`}>
+        {message}
+      </p>
+    </div>
+  );
+
   const renderEnterButton = () => {
-    // 1. Participant Status (Highest Priority)
     if (myStatus === "FINISHED") {
-      return (
-        <div className="flex flex-col items-center gap-2">
-          <button disabled className="btn btn-success btn-outline rounded-2xl px-12 h-14 text-lg font-black uppercase opacity-50 cursor-not-allowed gap-2">
-            <Lock size={18} /> Finished
-          </button>
-          <p className="text-success text-[10px] font-black uppercase tracking-[0.2em] mt-2">
-            Sector Evaluation Complete
-          </p>
-        </div>
-      );
+      return <StatusNotice variant="success" icon={<Lock size={18} />} title="Finished" message="Sector Evaluation Complete" />;
     }
-
     if (myStatus === "DISQUALIFIED" || myWarnings > 3) {
-      return (
-        <div className="flex flex-col items-center gap-2">
-          <button disabled className="btn btn-error btn-outline rounded-2xl px-12 h-14 text-lg font-black uppercase opacity-50 cursor-not-allowed gap-2">
-            <Lock size={18} /> Disqualified
-          </button>
-          <p className="text-error text-[10px] font-black uppercase tracking-[0.2em] mt-2 animate-pulse">
-            Access Revoked: Integrity Breach
-          </p>
-        </div>
-      );
+      return <StatusNotice variant="error" icon={<Lock size={18} />} title="Disqualified" message="Access Revoked: Integrity Breach" />;
     }
-
-    // 2. PHASE BASED LOGIC
-    // 0. UPCOMING PHASE
     if (phase === "upcoming") {
       if (!isRegistered) {
         return (
           <div className="flex flex-col items-center gap-4">
             <p className="text-xs font-black opacity-40 uppercase tracking-[0.2em] mb-2">Registration is Open</p>
-            <button
-              onClick={() => {
-                const regBtn = document.getElementById("register-contest-btn");
-                if (regBtn) regBtn.click();
-              }}
-              className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all"
-            >
+            <button onClick={clickRegister} className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all">
               Secure My Spot
             </button>
           </div>
@@ -121,8 +110,6 @@ export default function ContestClientView({ initialContest }) {
         </div>
       );
     }
-
-    // 1. ENDED PHASE
     if (phase === "ended") {
       return (
         <div className="flex flex-col items-center gap-4">
@@ -135,35 +122,21 @@ export default function ContestClientView({ initialContest }) {
         </div>
       );
     }
-
-    // 2. RUNNING PHASE (But not registered)
     if (!isRegistered) {
       return (
         <div className="flex flex-col items-center gap-4">
-          <p className="text-error text-[10px] font-black uppercase tracking-widest animate-pulse">
-            Battle is Live! Final Call for Entry
-          </p>
-          <button
-            onClick={() => {
-              const regBtn = document.getElementById("register-contest-btn");
-              if (regBtn) regBtn.click();
-            }}
-            className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/20 hover:scale-105 transition-all"
-          >
+          <p className="text-error text-[10px] font-black uppercase tracking-widest animate-pulse">Battle is Live! Final Call for Entry</p>
+          <button onClick={clickRegister} className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/20 hover:scale-105 transition-all">
             Register & Enter
           </button>
         </div>
       );
     }
-
-    // 3. RUNNING PHASE (Resume logic)
     if (myWarnings > 0) {
       return (
         <div className="flex flex-col items-center gap-4">
           <Link href={`/contest/problem-view/${contestId}`}>
-            <button className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all">
-              Resume Arena
-            </button>
+            <button className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all">Resume Arena</button>
           </Link>
           <div className="flex items-center gap-3 px-5 py-2 bg-error/10 border border-error/20 text-error rounded-full text-[10px] font-black uppercase tracking-widest">
             <AlertTriangle size={14} className="animate-pulse" />
@@ -172,13 +145,9 @@ export default function ContestClientView({ initialContest }) {
         </div>
       );
     }
-
-    // Active & Ready
     return (
       <Link href={`/contest/problem-view/${contestId}`}>
-        <button className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all">
-          Enter Arena
-        </button>
+        <button className="btn btn-primary rounded-2xl px-12 h-14 text-lg font-black uppercase shadow-2xl shadow-primary/30 hover:scale-105 transition-all">Enter Arena</button>
       </Link>
     );
   };

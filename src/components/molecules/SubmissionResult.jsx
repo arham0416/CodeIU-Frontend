@@ -1,5 +1,3 @@
-import React from "react";
-
 function determineFinalStatus(runResults, isCustom) {
   const maxStats = runResults.reduce((acc, curr) => ({
     maxMemory: Math.max(acc.maxMemory, parseFloat(curr.memory) || 0),

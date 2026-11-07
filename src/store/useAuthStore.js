@@ -19,9 +19,10 @@ export const useAuthStore = create((set, get) => ({
       // Determine OAuth redirect URL based on environment
       const ALB_URL = process.env.NEXT_PUBLIC_DIRECT_ALB_URL;
       const isLocal = !ALB_URL || ALB_URL.includes("localhost");
-      const authUrl = isLocal 
-        ? "http://localhost:8020/auth/api/v1/auth/google/redirect" 
-        : (ALB_URL || "https://api.codeiu.in") + "/auth/api/v1/auth/google/redirect";
+      const authBase = ALB_URL || process.env.NEXT_PUBLIC_API_URL || "";
+      const authUrl = isLocal
+        ? "http://localhost:8020/auth/api/v1/auth/google/redirect"
+        : `${authBase}/auth/api/v1/auth/google/redirect`;
 
       // OAuth must be a browser redirect (NOT axios/fetch)
       window.location.href = authUrl;
@@ -43,6 +44,7 @@ export const useAuthStore = create((set, get) => ({
       toast.error(res?.data?.message || "Signup failed");
       return false;
     } catch (e) {
+      console.error("Signup failed:", e);
       toast.error(e?.response?.data?.message || "Error signing up");
       return false;
     } finally {
@@ -80,40 +82,41 @@ export const useAuthStore = create((set, get) => ({
   },
 
 
-  passwordChange: async (payload) => {
+  postAuthAction: async (path, payload, successMessage, failureMessage, errorMessage) => {
     try {
-      const res = await axiosInstanceAuthService.post("/auth/reset-password", payload, {
+      const res = await axiosInstanceAuthService.post(path, payload, {
         withCredentials: true,
       });
       if (res?.status === 200 && res?.data?.status === true) {
-        toast.success(res?.data?.message || "Password changed successfully");
+        toast.success(res?.data?.message || successMessage);
         return true;
       }
-      toast.error(res?.data?.message || "Failed to change password");
+      toast.error(res?.data?.message || failureMessage);
       return false;
     } catch (e) {
-      toast.error(e?.response?.data?.message || "Error changing password");
+      console.error(`Auth action failed (${path}):`, e);
+      toast.error(e?.response?.data?.message || errorMessage);
       return false;
     }
   },
 
+  passwordChange: async (payload) =>
+    get().postAuthAction(
+      "/auth/reset-password",
+      payload,
+      "Password changed successfully",
+      "Failed to change password",
+      "Error changing password",
+    ),
 
-  forgetPasswordRequest: async (payload) => {
-    try {
-      const res = await axiosInstanceAuthService.post("/auth/password-change", payload, {
-        withCredentials: true,
-      });
-      if (res?.status === 200 && res?.data?.status === true) {
-        toast.success(res?.data?.message || "Password reset link sent! Check your email and spam folder.");
-        return true;
-      }
-      toast.error(res?.data?.message || "Failed to send reset link");
-      return false;
-    } catch (e) {
-      toast.error(e?.response?.data?.message || "Error sending reset link");
-      return false;
-    }
-  },
+  forgetPasswordRequest: async (payload) =>
+    get().postAuthAction(
+      "/auth/password-change",
+      payload,
+      "Password reset link sent! Check your email and spam folder.",
+      "Failed to send reset link",
+      "Error sending reset link",
+    ),
 
   login: async (payload) => {
     set({ isLoggingIn: true });
@@ -128,6 +131,7 @@ export const useAuthStore = create((set, get) => ({
       toast.error(res?.data?.message || "Invalid credentials");
       return false;
     } catch (e) {
+      console.error("Login failed:", e);
       toast.error(e?.response?.data?.message || "Error logging in");
       return false;
     } finally {
@@ -170,6 +174,7 @@ export const useAuthStore = create((set, get) => ({
       toast.error(res?.data?.message || "Email verification failed");
       return false;
     } catch (e) {
+      console.error("Email verification failed:", e);
       toast.error(e?.response?.data?.message || "Error verifying email");
       return false;
     }
@@ -188,6 +193,7 @@ export const useAuthStore = create((set, get) => ({
       toast.error(res?.data?.message || "Update failed");
       return false;
     } catch (e) {
+      console.error("Profile update failed:", e);
       toast.error(e?.response?.data?.message || "Error updating profile");
       return false;
     }

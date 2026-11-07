@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { axiosInstanceSubmissionService } from "@/lib/axios";
-import { Loader2, Trophy, Clock, Cpu, Calendar } from "lucide-react";
+import { Loader2, Trophy } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 export default function ProblemLeaderboard({ problemId }) {

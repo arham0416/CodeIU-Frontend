@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from "react";
 import { useAuthStore } from '@/store/useAuthStore';
-import { User, Mail, Github, Linkedin, AlignLeft, Save, X } from 'lucide-react';
+import { User, Github, Linkedin, AlignLeft, Save, X } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 const EditProfileForm = () => {

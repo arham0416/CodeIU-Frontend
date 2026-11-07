@@ -105,6 +105,7 @@ export default function AdminPlaylistAttachResourceDialog({ playlistId, subdivis
             setUploadMode("UPLOAD");
             setType("FILE");
         } catch (e) {
+            console.error("Failed to attach resource:", e);
             // Error handling done in store
         } finally {
             setLoading(false);

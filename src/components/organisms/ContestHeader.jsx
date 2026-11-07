@@ -1,10 +1,9 @@
 "use client";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParticipantStore } from "@/store/useParticipantStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Calendar, UserPlus, UserMinus } from "lucide-react";
 import ConfirmDialog from "@/components/molecules/ConfirmDialog";
-import { useState } from "react";
 
 export default function ContestHeader({ contest }) {
   const { authUser } = useAuthStore();

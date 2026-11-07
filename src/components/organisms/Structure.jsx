@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import IsClient from '@/components/atoms/IsClient'
 import Header from '@/components/organisms/Header'
 import Footer from '@/components/organisms/Footer'

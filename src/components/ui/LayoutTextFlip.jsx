@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import clsx from "clsx";
 
 export const LayoutTextFlip = ({

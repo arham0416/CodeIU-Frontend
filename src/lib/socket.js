@@ -21,7 +21,7 @@ export const getSocket = () => {
     });
 
     submissionSocket.on("connect", () => {
-      console.log("✅ Connected to Submission Service:", submissionSocket.id);
+      // Connection established; no-op in production logging.
     });
 
     submissionSocket.on("connect_error", (err) => {
@@ -42,7 +42,7 @@ export const getContestSocket = () => {
     });
 
     contestSocket.on("connect", () => {
-      console.log("✅ Connected to Contest Service (Realtime):", contestSocket.id);
+      // Connection established; no-op in production logging.
     });
 
     contestSocket.on("connect_error", (err) => {
@@ -57,14 +57,12 @@ export const joinContestRoom = (contestId) => {
   const s = getContestSocket();
   if (!contestId) return;
   s.emit("join:contest", { contestId });
-  console.log(`📡 join:contest -> ${contestId}`);
 };
 
 export const joinUserRoom = (userId) => {
   const s = getContestSocket();
   if (!userId) return;
   s.emit("join:user", { userId });
-  console.log(`🔐 join:user -> ${userId}`);
 };
 
 // Submission specific join
@@ -72,7 +70,6 @@ export const joinSubmissionRoom = (userId) => {
   const s = getSocket();
   if (!userId) return;
   s.emit("join-room", { userId });
-  console.log(`📑 join-room (Submission) -> ${userId}`);
 }
 
 export const disconnectSocket = () => {
@@ -84,5 +81,4 @@ export const disconnectSocket = () => {
     contestSocket.disconnect();
     contestSocket = null;
   }
-  console.log("🔌 All sockets disconnected manually");
 };

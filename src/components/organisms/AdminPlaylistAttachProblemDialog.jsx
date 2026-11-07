@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-    X, Plus, Search,
-    Trash2, Database, ListChecks
+    X,
+    Plus,
+    Search,
+    Database,
 } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
@@ -52,6 +54,7 @@ export default function AdminPlaylistAttachProblemDialog({ playlistId, subdivisi
             await addProblemToSubdivision(playlistId, subdivisionId, problemId, order);
             setOpen(false);
         } catch (e) {
+            console.error("Failed to attach problem:", e);
             // toast in store
         } finally {
             setLoading(false);

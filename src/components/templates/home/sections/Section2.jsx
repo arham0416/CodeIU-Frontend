@@ -1,7 +1,7 @@
 "use client";
-import { ArrowRight, Play, Terminal, Cpu, ChevronRight } from 'lucide-react';
+import { ArrowRight, Play, Terminal, Cpu } from "lucide-react";
 import Link from 'next/link';
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function Section2() {
   return (

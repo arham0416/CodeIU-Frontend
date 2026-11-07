@@ -5,6 +5,20 @@ import Link from "next/link";
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 
+const StatusCard = ({ icon, title, message }) => (
+    <div className="bg-gray-100 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center m-4">
+        <div className="flex justify-center mb-4">{icon}</div>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">{title}</h1>
+        <p className="text-gray-600 mb-6">{message}</p>
+        <Link
+            href="/login"
+            className="inline-block px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors"
+        >
+            Go to Login
+        </Link>
+    </div>
+);
+
 export default function VerifyEmailView({ verificationId }) {
     const { verifyEmail } = useAuthStore();
     const [status, setStatus] = useState("verifying"); // verifying, success, error
@@ -15,11 +29,9 @@ export default function VerifyEmailView({ verificationId }) {
                 setStatus("error");
                 return;
             }
-
             const success = await verifyEmail(verificationId);
             setStatus(success ? "success" : "error");
         };
-
         verify();
     }, [verificationId, verifyEmail]);
 
@@ -33,39 +45,19 @@ export default function VerifyEmailView({ verificationId }) {
 
     if (status === "success") {
         return (
-            <div className="bg-gray-100 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center m-4">
-                <div className="flex justify-center mb-4">
-                    <CheckCircle className="h-16 w-16 text-green-500" />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">Email Verified!</h1>
-                <p className="text-gray-600 mb-6">
-                    Your email has been successfully verified. You can now log in to your account.
-                </p>
-                <Link
-                    href="/login"
-                    className="inline-block px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                    Go to Login
-                </Link>
-            </div>
+            <StatusCard
+                icon={<CheckCircle className="h-16 w-16 text-green-500" />}
+                title="Email Verified!"
+                message="Your email has been successfully verified. You can now log in to your account."
+            />
         );
     }
 
     return (
-        <div className="bg-gray-100 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center m-4">
-            <div className="flex justify-center mb-4">
-                <XCircle className="h-16 w-16 text-red-500" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Verification Failed</h1>
-            <p className="text-gray-600 mb-6">
-                The verification link is invalid, expired, or something went wrong.
-            </p>
-            <Link
-                href="/login"
-                className="inline-block px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors"
-            >
-                Go to Login
-            </Link>
-        </div>
+        <StatusCard
+            icon={<XCircle className="h-16 w-16 text-red-500" />}
+            title="Verification Failed"
+            message="The verification link is invalid, expired, or something went wrong."
+        />
     );
 }

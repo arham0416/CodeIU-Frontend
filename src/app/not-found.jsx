@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Home, ArrowLeft, Terminal, AlertTriangle } from 'lucide-react';
 
 export default function NotFound() {

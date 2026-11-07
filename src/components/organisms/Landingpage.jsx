@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TextFlip } from "@/components/atoms/TextFlip";
 import Link from "next/link";
-import { Cpu, Zap, Code2, ChevronRight } from "lucide-react";
-import GridHighlights from "@/components/atoms/GridHighlights";
+import { Cpu, Code2, ChevronRight } from "lucide-react";
 
 const Landingpage = () => {
   const [fadeOut, setFadeOut] = useState(false);

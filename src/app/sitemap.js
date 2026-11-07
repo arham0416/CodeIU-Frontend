@@ -9,7 +9,7 @@ import { getContests } from "@/lib/services/contestService";
  * @property {number} priority
  */
 
-const BASE_URL = "https://codeiu.in";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://codeiu.in";
 
 export default async function sitemap() {
   // 1. Static Core Routes

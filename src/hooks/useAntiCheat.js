@@ -20,7 +20,6 @@ export const useAntiCheat = (contestId, userId, { isArena = false } = {}) => {
 
     // 2. Define Socket Listeners
     const onWarningUpdate = ({ warnings, maxWarnings }) => {
-      console.log(`⚠️ Warning Sync: ${warnings}/${maxWarnings}`);
       setWarnings(warnings);
       
       toast.warn(`Integrity Warning: (${warnings}/${maxWarnings})`, {

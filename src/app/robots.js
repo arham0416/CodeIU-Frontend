@@ -1,5 +1,5 @@
 export default function robots() {
-  const baseUrl = "https://codeiu.in";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://codeiu.in";
 
   return {
     rules: {

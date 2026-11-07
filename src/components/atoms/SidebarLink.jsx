@@ -1,5 +1,3 @@
-import React from 'react'
-
 const SidebarLink = ({ icon: Icon, text, active, onClick }) => (
     <li
         onClick={onClick}

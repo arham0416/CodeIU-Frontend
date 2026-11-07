@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
-import { RefreshCcw, Trophy, Zap, Clock, User, Award, History } from "lucide-react";
+import { useEffect, useMemo } from "react";
+import { RefreshCcw, Trophy, Zap, User, Award, History } from "lucide-react";
 import { useLeaderboardStore } from "@/store/useLeaderboardStore";
 
 /* ----- Helpers (Preserved) ----- */

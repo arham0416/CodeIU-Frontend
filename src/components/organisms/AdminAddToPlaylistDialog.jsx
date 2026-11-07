@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Search, Plus, X, Layers, Book, Check } from "lucide-react";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
 import { toast } from "react-toastify";
@@ -47,6 +47,7 @@ const AdminAddToPlaylistDialog = ({ isOpen, onClose, problem }) => {
             await addProblemToSubdivision(selectedPlaylistId, selectedSubdivisionId, problem.id);
             onClose();
         } catch (error) {
+            console.error("Failed to add problem to subdivision:", error);
             // Error toast handled by store
         } finally {
             setIsLoading(false);

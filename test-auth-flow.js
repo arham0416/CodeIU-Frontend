@@ -19,27 +19,26 @@ async function run() {
     hostname: 'localhost', port: 3000, path: '/api/v1/auth/login', method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Content-Length': loginData.length }
   });
-  console.log("Login Status:", loginRes.statusCode);
+  process.stdout.write(`Login Status: ${loginRes.statusCode}\n`);
   const cookies = loginRes.headers['set-cookie'];
-  console.log("Login Cookies:");
-  if(cookies) cookies.forEach(c => console.log(c));
+  process.stdout.write("Login Cookies:\n");
+  if (cookies) cookies.forEach((c) => process.stdout.write(`${c}\n`));
 
-  // extract the raw cookie strings to send
   const cookieString = cookies ? cookies.map(c => c.split(';')[0]).join('; ') : '';
 
   const logoutRes = await request({
     hostname: 'localhost', port: 3000, path: '/api/v1/auth/logout', method: 'POST',
     headers: { 'Cookie': cookieString }
   });
-  console.log("Logout Status:", logoutRes.statusCode);
+  process.stdout.write(`Logout Status: ${logoutRes.statusCode}\n`);
   const logoutCookies = logoutRes.headers['set-cookie'];
-  console.log("Logout Cookies:");
-  if(logoutCookies) logoutCookies.forEach(c => console.log(c));
+  process.stdout.write("Logout Cookies:\n");
+  if (logoutCookies) logoutCookies.forEach((c) => process.stdout.write(`${c}\n`));
 
   const checkRes = await request({
     hostname: 'localhost', port: 3000, path: '/api/v1/auth/check-Auth?t=123', method: 'GET',
     headers: { 'Cookie': cookieString, 'Cache-Control': 'no-cache' }
   });
-  console.log("CheckAuth Status (using original login cookie):", checkRes.statusCode);
+  process.stdout.write(`CheckAuth Status (using original login cookie): ${checkRes.statusCode}\n`);
 }
 run();

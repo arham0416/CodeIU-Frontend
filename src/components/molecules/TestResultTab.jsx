@@ -1,4 +1,3 @@
-import React from "react";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 import SubmissionResult from "@/components/molecules/SubmissionResult";
 

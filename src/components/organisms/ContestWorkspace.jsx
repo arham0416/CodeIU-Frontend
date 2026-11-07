@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useBundleStore } from "@/store/useBundleStore";
 import { useSubmissionStore } from "@/store/useSubmissionStore";

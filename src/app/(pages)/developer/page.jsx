@@ -1,10 +1,8 @@
-import React from "react";
 import {
   Github,
   Linkedin,
   Play,
   Pause,
-  Code2,
   Cpu,
   Terminal,
   Braces,
